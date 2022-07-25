@@ -1,0 +1,60 @@
+{% extends 'food/main.html' %}
+{% load static %}
+
+{% block content %}
+<hr>
+
+<section class="banner">
+    <div class="container">
+        <div class="row">
+            <div style="width:800px; margin:0 auto;" class="col-md-6 col-md-offset-3 ">
+                <h4>Welcome to Paradise<h4>
+                <h2>Canteen Management</h2>
+                <p>One thousand flavors in one place.</p>
+                <div class="primary-button">
+                    <a class="godown" href="#service">Order Right Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services" id="service">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="service-item">
+                    <a class="b" href="{% url 'breakfast' %}">
+                        <img src="static/images/breakfast.png" alt="Breakfast">
+                        <h4>Breakfast</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="service-item">
+                    <a class="b" href="{% url 'lunch' %}">
+                        <img src="static/images/lunch.png" alt="Lunch">
+                        <h4>Lunch</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="service-item">
+                    <a class="b" href="{% url 'dinner' %}">
+                        <img src="static/images/dinner.png" alt="Dinner">
+                        <h4>Dinner</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="service-item">
+                    <a class="b" href="{% url 'todayspl' %}">
+                        <img src="static/images/dessert.png" alt="Desserts">
+                        <h4>Todays Special</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
