@@ -5,5 +5,5 @@ def menu(request):
     data = cartData(request)
     cartItems = data['cartItems']
 
-    context = {'cartItems':cartItems}
+    context = {'cartItems':cartItems}  
     return render(request, 'food/menu.html', context)
