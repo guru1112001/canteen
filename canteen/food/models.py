@@ -15,16 +15,15 @@ class Product(models.Model):
     CATEGORY = (
         ('Breakfast', 'Breakfast'),
         ('Lunch', 'Lunch'),
-        ('Dinner', 'Dinner'),
         ('Todayspl', 'Todays special'),
     )
-    name = models.CharField(max_length=200, null=True)
+    p_name = models.CharField(max_length=200, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
     image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.p_name
 
     @property
     def ImageURL(self):
@@ -36,15 +35,12 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    HOME = [
-        ('Yes','Yes'),
-        ('No','No'),
-    ]
+
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null = True, blank = False)
     transaction_id = models.CharField(max_length=100, null=True)
-    home_delivery = models.CharField(max_length=200, null=True, choices=HOME)
+
 
     def __str__(self):
         return str(self.id)
@@ -54,12 +50,6 @@ class Order(models.Model):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total for item in orderitems])
         return total
-
-    @property
-    def get_cart_items(self):
-        orderitems = self.orderitem_set.all()
-        total = sum([item.quantity for item in orderitems])
-        return total
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
@@ -67,7 +57,7 @@ class OrderItem(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.product.name
+        return self.product.p_name
     
     @property
     def get_total(self):
