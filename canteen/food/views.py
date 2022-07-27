@@ -1,12 +1,11 @@
-import django
+
 from django.shortcuts import render, redirect
-from pyrsistent import immutable
 from .utils import cookieCart, cartData, guestOrder
 from .models import *
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-#from .forms import OrderForm, CreateUserForm, OrderItemForm, CustomerForm, Order2Form, ProductForm
+from .forms import OrderForm, CreateUserForm, OrderItemForm, CustomerForm, Order2Form, ProductForm
 
 import json
 import datetime
@@ -60,8 +59,10 @@ def cart(request):
         print(request.POST)
         form = OrderForm(request.POST)
         if form.is_valid():
+            delivery = request.POST['take_away']
+            request.session['delivery'] = delivery
             form.save()
-
+            print('delivery:', delivery)
         return redirect('checkout')
 
     context = {'items': items, 'order': order,
@@ -126,6 +127,7 @@ def processOrder(request):
 
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
+    order.take_away = request.session['delivery']
 
     if total == float(order.get_cart_total):
         order.complete = True

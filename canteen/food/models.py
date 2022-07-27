@@ -1,3 +1,4 @@
+from tkinter.messagebox import YES
 from django.db import models
 
 from django.contrib.auth.models import User
@@ -35,11 +36,15 @@ class Product(models.Model):
 
 
 class Order(models.Model):
+    pick_up=[
+        ("yes","yes")
 
+    ]
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null = True, blank = False)
     transaction_id = models.CharField(max_length=100, null=True)
+    take_away=models.CharField(max_length=100,null=True,choices=pick_up)
 
 
     def __str__(self):
@@ -49,7 +54,7 @@ class Order(models.Model):
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total for item in orderitems])
-        return total
+        return total #tell  us the quantity of items in cart 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
@@ -62,4 +67,4 @@ class OrderItem(models.Model):
     @property
     def get_total(self):
         total = self.product.price * self.quantity
-        return total
+        return total 
