@@ -9,7 +9,7 @@ class Customer(models.Model):
     name = models.CharField(max_length = 200, null = True)
     email = models.EmailField(max_length = 200, null = True)
 
-    def __str__(self):
+    def __str__(self): #str function in a django model returns a string that is exactly rendered as the display name of instances for that model.
         return self.name
 
 class Product(models.Model):
@@ -55,6 +55,12 @@ class Order(models.Model):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total for item in orderitems])
         return total #tell  us the quantity of items in cart 
+    @property
+    def get_cart_items(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.quantity for item in orderitems])
+        return total
+        
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)

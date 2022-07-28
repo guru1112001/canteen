@@ -6,12 +6,12 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import OrderForm, CreateUserForm, OrderItemForm, CustomerForm, Order2Form, ProductForm
-
+from .decorators import user_only,admin_only
 import json
 import datetime
 
 
-# @user_only
+@user_only
 def menu(request):
     data = cartData(request)
     cartItems = data['cartItems']
@@ -175,3 +175,21 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('menu')
+
+@admin_only
+def dashboard(request):
+    orders = Order.objects.all()
+    orderitems = OrderItem.objects.all()
+    customers = Customer.objects.all()
+    products = Product.objects.all()
+
+    total_customers = customers.count()
+    total_orders = orders.count()
+    delivered = orders.filter(take_away='Yes').count()
+    pending = orders.filter(complete='False').count()
+    payment = orders.filter(complete='True').count()
+
+    context = {'orders': orders, 'customers': customers,'orderitems':orderitems,'products':products,'payment':payment,
+               'total_customers': total_customers, 'total_orders': total_orders, 'delivered': delivered, 'pending': pending}
+
+    return render(request,'food/dashboard.html',context)
