@@ -52,14 +52,14 @@
     <div class="col-sm-6 text-center">
         <div class="card bg-secondary col-md">
             <div class=" card card-body">
-            <a href="#" class="btn btn-sm btn-outline-info"><i class="fa fa-cutlery f-left"></i>ADD DISH</a>
+            <a href="{% url 'add_product' %}" class="btn btn-sm btn-outline-info"><i class="fa fa-cutlery f-left"></i>ADD DISH</a>
             </div>
         </div>
     </div>
     <div class="col-sm-6 text-center">
         <div class="card bg-secondary col-md">
             <div class=" card card-body">
-                <a href="#" class="btn btn-sm btn-outline-info"><i class="fa fa-cutlery f-left"></i>VIEW DISHES</a>
+                <a href="{% url 'view_product' %}" class="btn btn-sm btn-outline-info"><i class="fa fa-cutlery f-left"></i>VIEW DISHES</a>
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@
                 </tr>
                 {% for customer in customers %}
                 <tr>
-                    <td><a href="#" class="btn btn-sm btn-info  ">View</a></td>
+                    <td><a href="{% url 'customer' customer.id %}" class="btn btn-sm btn-info  ">View</a></td>
                     <td>{{customer.name}}</td>
                     <td>{{customer.email}}</td>
                 </tr>
@@ -106,8 +106,8 @@
                     <td>{{orderitem.product}}</td>
                     <td>{{orderitem.date_added}}</td>
                     <td>{{orderitem.quantity}}</td>
-                    <td><a class="btn btn-sm btn-warning" href="#">Update</a></td>
-                    <td><a class="btn btn-sm btn-danger" href="#">Delete</a></td>
+                    <td><a class="btn btn-sm btn-warning" href="{% url 'update_order' orderitem.id %}">Update</a></td>
+                    <td><a class="btn btn-sm btn-danger" href="{% url 'cancel_order' orderitem.order.id orderitem.id %}">Delete</a></td>
                     {% endif %}
                 </tr>
                 {% endfor %}

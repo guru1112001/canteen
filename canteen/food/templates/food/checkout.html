@@ -16,26 +16,6 @@
                     </div>
                 </div>
 
-                <div id="shipping-info">
-                    <hr>
-                    <p>Shipping Information:</p>
-                    <hr>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="address" placeholder="Address">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="city" placeholder="City">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="state" placeholder="State">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="zipcode" placeholder="Zip code">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="country" placeholder="Country">
-                    </div>
-                </div>
 
                 <hr>
                 <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
@@ -142,7 +122,7 @@
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken,
             },
-            body: JSON.stringify({ 'form': userFormData, 'shipping': shippingInfo })
+            
         })
             .then((response) => {
                 return response.json();

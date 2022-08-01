@@ -2,6 +2,7 @@ import json
 from .models import *
 
 
+
 def cookieCart(request):
     try:
         cart = json.loads(request.COOKIES['cart'])
@@ -86,5 +87,5 @@ def guestOrder(request, data):
             quantity=item['quantity']
         )
 
-    return customer, order
+    return customer, order,orderItem
 
