@@ -4,12 +4,10 @@ from django import forms
 from .models import *
 from django.contrib.auth.models import User
 
-
-
 class OrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = ['take_away']
+        fields = ['home_delivery']
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -26,6 +24,7 @@ class CreateUserForm(UserCreationForm):
             attrs={'placeholder': ' Enter Password'})
         self.fields['password2'].widget = forms.PasswordInput(
             attrs={'placeholder': ' Confirm Password'})
+
 
 class OrderItemForm(ModelForm):
     class Meta:
@@ -48,7 +47,7 @@ class CustomerForm(ModelForm):
             self.fields['email'].widget.attrs.update({
                 'class': 'form-control'
             })
-
+    
 class Order2Form(ModelForm):
     class Meta:
         model = Order
@@ -62,7 +61,7 @@ class ProductForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
         for field in iter(self.fields):
-            self.fields['p_name'].widget.attrs.update({
+            self.fields['name'].widget.attrs.update({
                 'class': 'form-control'
             })
             self.fields['price'].widget.attrs.update({

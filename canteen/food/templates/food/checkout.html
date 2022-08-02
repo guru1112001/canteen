@@ -16,6 +16,26 @@
                     </div>
                 </div>
 
+                <div id="shipping-info">
+                    <hr>
+                    <p>Shipping Information:</p>
+                    <hr>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="address" placeholder="Address">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="city" placeholder="City">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="state" placeholder="State">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="zipcode" placeholder="Zip code">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="country" placeholder="Country">
+                    </div>
+                </div>
 
                 <hr>
                 <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
@@ -40,7 +60,7 @@
             <div class="cart-row">
                 <div style="flex:2"><img class="row-image" src="{{item.product.ImageURL}}"></div>
                 <div style="flex:2">
-                    <p>{{item.product.p_name}}</p>
+                    <p>{{item.product.name}}</p>
                 </div>
                 <div style="flex:1">
                     <p>₹{{item.product.price|floatformat:2}}</p>
@@ -57,10 +77,10 @@
 </div>
 <script>
 
-    var take_away = '{{delivery}}';
+    var home_delivery = '{{delivery}}';
     var total = '{{order.get_cart_total}}';
 
-    if(take_away == 'yes') 
+    if(home_delivery == 'No') 
     {
         document.getElementById('shipping-info').innerHTML = ''
     }
@@ -103,15 +123,26 @@
             'total': total,
         }
 
-        
+        var shippingInfo = {
+            'address': null,
+            'city': null,
+            'state': null,
+            'zipcode': null,
+        }
 
+        if (home_delivery != 'No') {
+            shippingInfo.address = form.address.value
+            shippingInfo.city = form.city.value
+            shippingInfo.state = form.state.value
+            shippingInfo.zipcode = form.zipcode.value
+        }
 
         if (user == 'AnonymousUser') {
             userFormData.name = form.name.value
             userFormData.email = form.email.value
         }
 
-        
+        console.log('Shipping Info',shippingInfo)
         console.log('User Info',userFormData)
 
         var url = '/process_order/'
@@ -122,7 +153,7 @@
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken,
             },
-            
+            body: JSON.stringify({ 'form': userFormData, 'shipping': shippingInfo })
         })
             .then((response) => {
                 return response.json();

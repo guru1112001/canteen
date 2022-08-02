@@ -2,7 +2,6 @@ import json
 from .models import *
 
 
-
 def cookieCart(request):
     try:
         cart = json.loads(request.COOKIES['cart'])
@@ -56,7 +55,8 @@ def cartData(request):
         items = cookieData['items']
 
     return {'items': items, 'order': order, 'cartItems': cartItems}
-    
+
+
 def guestOrder(request, data):
     print('User is not logged in')
 
@@ -87,5 +87,4 @@ def guestOrder(request, data):
             quantity=item['quantity']
         )
 
-    return customer, order,orderItem
-
+    return customer, order
