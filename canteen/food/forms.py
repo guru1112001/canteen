@@ -7,15 +7,18 @@ from django.contrib.auth.models import User
 class OrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = ['home_delivery']
+        fields = ['take_away']
 
 class CreateUserForm(UserCreationForm):
+    
     class Meta:
         model = User
-        fields = ['username','email','password1','password2']
+        fields = ["first_name",'username','email','password1','password2']
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': ' Enter Name'}),
-            'email': forms.TextInput(attrs={'placeholder': ' Enter Email'})
+            "first_name": forms.TimeInput(attrs={"placeholder": "enter your Name "}),
+            'username': forms.TextInput(attrs={'placeholder': ' Enter UserName'}),
+            'email': forms.TextInput(attrs={'placeholder': ' Enter Email'}),
+    
         }
 
     def __init__(self, *args, **kwargs):

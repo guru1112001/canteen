@@ -77,10 +77,10 @@
 </div>
 <script>
 
-    var home_delivery = '{{delivery}}';
+    var take_away = '{{delivery}}';
     var total = '{{order.get_cart_total}}';
 
-    if(home_delivery == 'No') 
+    if(take_away == 'No') 
     {
         document.getElementById('shipping-info').innerHTML = ''
     }
@@ -90,7 +90,7 @@
             document.getElementById('user-info').innerHTML = ''
         }
 
-    if(home_delivery == 'No' && user != 'AnonymousUser')
+    if(take_away == 'No' && user != 'AnonymousUser')
     {
         document.getElementById('form-wrapper').classList.add('hidden')
         document.getElementById('payment-info').classList.remove('hidden')
@@ -130,7 +130,7 @@
             'zipcode': null,
         }
 
-        if (home_delivery != 'No') {
+        if (take_away != 'No') {
             shippingInfo.address = form.address.value
             shippingInfo.city = form.city.value
             shippingInfo.state = form.state.value

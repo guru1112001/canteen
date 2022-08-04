@@ -6,6 +6,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE, null = True, blank = True)
     name = models.CharField(max_length = 200, null = True)
     email = models.EmailField(max_length = 200, null = True)
+    
 
     def __str__(self):
         return self.name
@@ -15,7 +16,6 @@ class Product(models.Model):
     CATEGORY = (
         ('Breakfast', 'Breakfast'),
         ('Lunch', 'Lunch'),
-        ('Dinner', 'Dinner'),
         ('Todayspl', 'Todays special'),
     )
     name = models.CharField(max_length=200, null=True)
@@ -44,7 +44,7 @@ class Order(models.Model):
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null = True, blank = False)
     transaction_id = models.CharField(max_length=100, null=True)
-    home_delivery = models.CharField(max_length=200, null=True, choices=HOME)
+    take_away = models.CharField(max_length=200, null=True, choices=HOME)
 
     def __str__(self):
         return str(self.id)
@@ -76,14 +76,4 @@ class OrderItem(models.Model):
         return total
 
 
-class ShippingAddress(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-    address = models.CharField(max_length=200, null=False)
-    city = models.CharField(max_length=200, null=False)
-    state = models.CharField(max_length=200, null=False)
-    zipcode = models.CharField(max_length=200, null=False)
-    date_added = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.address
