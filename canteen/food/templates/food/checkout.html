@@ -18,23 +18,21 @@
 
                 <div id="shipping-info">
                     <hr>
-                    <p>Shipping Information:</p>
+                    <p>Student-Information:</p>
                     <hr>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="address" placeholder="Address">
+                        <input class="form-control" type="text" name="name" placeholder="Name">
                     </div>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="city" placeholder="City">
+                        <input class="form-control" type="text" name="class" placeholder="Class">
                     </div>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="state" placeholder="State">
+                        <input class="form-control" type="text" name="course_sem" placeholder="course_sem">
                     </div>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="zipcode" placeholder="Zip code">
+                        <input class="form-control" type="text" name="enrollment_no" placeholder="Enrollment_no">
                     </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="country" placeholder="Country">
-                    </div>
+                    
                 </div>
 
                 <hr>
@@ -124,17 +122,17 @@
         }
 
         var shippingInfo = {
-            'address': null,
-            'city': null,
-            'state': null,
-            'zipcode': null,
+            'name': null,
+            'class': null,
+            'course_sem': null,
+            'enrollment_no': null,
         }
 
         if (take_away != 'No') {
-            shippingInfo.address = form.address.value
-            shippingInfo.city = form.city.value
-            shippingInfo.state = form.state.value
-            shippingInfo.zipcode = form.zipcode.value
+            shippingInfo.name = form.name.value
+            shippingInfo.class = form.class.value
+            shippingInfo.course_sem = form.course_sem.value
+            shippingInfo.enrollment_no = form.enrollment_no.value
         }
 
         if (user == 'AnonymousUser') {
