@@ -12,7 +12,7 @@ def Customer_profile(sender, instance, created, **kwargs):
             email=instance.email,
         )
 
-        print('Profile created')
+        
 
 
 post_save.connect(Customer_profile, sender=User)
