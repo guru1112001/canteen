@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User 
-# Create your models here.
+
 
 class Customer(models.Model): #creating the model customer to the db
     user = models.OneToOneField(User, on_delete = models.CASCADE, null = True, blank = True) #This is used when one record of a model A is related to exactly one record of another model B
