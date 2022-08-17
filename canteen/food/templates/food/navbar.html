@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>navbar</title>
+</head>
+
+<style>
+    .navbarContainer
+    {
+        background-color: transparent;
+        padding: 18px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logoHeading
+    {
+        text-decoration: none;
+        color: #7FB7B0;
+        text-transform: uppercase;
+        font-size: 18px;
+    }
+
+    .logoHeading:hover{
+        text-decoration: none;
+        color: black;
+
+    }
+
+    .anchoreContainer
+    {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .anchorestag
+    {
+        padding: 10px;
+        margin: 0px;
+        list-style: none;
+    }
+
+    .anchorestag a
+    {
+        color: #7FB7B0;
+    }
+
+    .navbarButtonsContainer
+    {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .navbarButtonsContainer a{
+        color: #7FB7B0;
+        background-color: #caf0f8;
+        padding: 5px 14px;
+        text-decoration: none;
+        border-radius: 10px;
+
+    }
+
+    .navbarButtonsContainer a:hover{
+        background-color: white;
+        border: 2px solid #caf0f8;
+    }
+
+</style>
+
+<body>
+    <nav class="navbarContainer">
+        {% if not user.is_staff %}
+        <a class="logoHeading" href="{% url 'menu' %}">
+            <!-- <img src="{% static 'images/logo.jpg' %}" class="img-responsive" /> -->
+            Canteen</a>
+        {% else %}
+        <a class="logoHeading" href="{% url 'dashboard' %}">
+            <!-- <img src="{% static 'images/logo.jpg' %}" class="img-responsive" /> -->
+            Canteen</a>
+        {% endif %}
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button> -->
+
+        <div class="anchoreContainer" id="navbarSupportedContent">
+            <ul class="anchorestag">
+                <li class="nav-item active">
+                    {% if not user.is_staff %}
+                    <a class="nav-link" href="{% url 'menu' %}">Home <span class="sr-only">(current)</span></a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'dashboard' %}">Home <span class="sr-only">(current)</span></a>
+                    {%endif%}
+                </li>
+            </ul>
+            <div class="navbarButtonsContainer">
+                {% if user.is_authenticated %}
+                <span class='msg'>Hello, {{request.user}}</span>
+                <a href="{% url 'logout' %}" class="my-2 my-sm-0">Logout</a>
+                {% else %}
+                <a href="{% url 'register' %}" class=" mr-sm-2">Register</a>
+                <a href="{% url 'login' %}" class=" my-2 my-sm-0">Login</a>
+                {% endif %}
+                <!-- {% if not user.is_staff %}
+                <a href="{% url 'cart'  %}">
+                    <img id="cart-icon" src="{% static 'images/cart.png' %}" />
+                </a>
+                <p id="cart-total">{{cartItems}}</p>
+                {% endif %} -->
+            </div>
+        </div>
+    </nav>
+</body>
+
+</html>

@@ -1,4 +1,6 @@
+{% extends 'food/main.html' %}
 {%block login%}
+
 <!DOCTYPE html>
 <html>
 
@@ -12,6 +14,7 @@
 
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600&display=swap');
         body,
         html {
             margin: 0;
@@ -61,6 +64,8 @@
 
         .user_card h3 {
             color: #198CA0;
+            font-family: 'Source Sans Pro', sans-serif;
+
         }
 
         .input_Container {
@@ -105,18 +110,27 @@
         .CreateAccount a {
             color: #198CA0;
         }
+
+        .loginnavbarContainer
+        {
+            position: absolute;
+            width: 1210px;
+        }
     </style>
 
 </head>
 
 <body>
     <div class="loginContainer">
+        <div class="loginnavbarContainer">
+            {%include "food/navbar.html"%}
+        </div>
         <div class="loginCard">
             <div class="user_card">
                 <h3 id="form-title">USER LOGIN</h3>
                 <div class="d-flex justify-content-center form_container">
                     <form method="POST" action="">
-                        <!-- {% csrf_token %} -->
+                        {% csrf_token %}
                         <div class="input_Container">
                             <input type="text" name="username" placeholder="Username">
                         </div>
@@ -130,12 +144,10 @@
                             <input class="btn login_btn" type="submit" value="Login">
                         </div>
                     </form>
-
                 </div>
                 {% for message in messages%}
                 <p>{{message}}</p>
                 {% endfor %}
-
                 <div class="CreateAccount">
                     <a href="{% url 'register' %}" class="ml-2 btn btn-outline-light">Create Account</a>
                 </div>
@@ -143,7 +155,6 @@
         </div>
     </div>
 </body>
-
 </html>
-
 {% endblock %}
+
