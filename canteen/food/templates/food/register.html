@@ -17,7 +17,7 @@
             height: 100%;
             background: #ef9ca6 !important;
         }
-
+/* 
         .user_card {
             width: 350px;
             margin-top: auto;
@@ -39,10 +39,6 @@
             margin-top: 20px;
         }
 
-        #form-title {
-            color: #fff;
-            font-family: raleway;
-        }
 
         .login_btn {
             width: 100%;
@@ -70,62 +66,142 @@
         .input_pass:focus {
             box-shadow: none !important;
             outline: 0px !important;
+        } */
+
+
+        /* new styling */
+
+        .registerContainer
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 55px 0px;
+            /* background-color: #5CB3E2; */
+            background-image: url("https://thumbs.dreamstime.com/b/abstract-sky-blue-color-mixture-effects-texture-background-wallpaper-marble-pattern-interiors-wall-design-many-uses-189072790.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
         }
+
+        .registerCard {
+            background-image: url("https://img.freepik.com/premium-vector/copyright-plagiarism-illustration_23-2148705662.jpg?");
+            height: 600px;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            width: 80%;
+            /* border: 1px solid black; */
+            border-radius: 20px;
+            /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
+            box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+            background-color: white;
+        }
+
+        .user_card {
+            width: 500px;
+            /* border: 1px solid black; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .user_card h3 {
+            color: #198CA0;
+            font-family: 'Source Sans Pro', sans-serif;
+
+        }
+        .input_Container {
+            margin: 15px 0px;
+
+        }
+
+        .input_Container input {
+            width: 450px;
+            background-color: #198CA0;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 18px;
+            border: 0px;
+            color: white;
+            border: none;
+            padding: 5px;
+        }
+
+        ::placeholder {
+            color: white;
+        }
+
+        .button_Container {
+            text-align: center;
+        }
+
+        .button_Container input {
+            width: 250px;
+            padding: 0px;
+            color: white;
+            background-color: #7FB7B0;
+            border-radius: 10px;
+        }
+
+        
+        .loginAccount a {
+            color: #198CA0;
+            border: 1px solid #198CA0;
+            padding: 2px 10px;
+        }
+
+        .loginAccount a:hover
+        {
+            background-color: #198CA0;
+            color: white;
+        }
+
+
     </style>
+
 
 </head>
 
 <body>
-    <div class="container h-100">
-        <div class="d-flex justify-content-center h-100">
+    <div class="registerContainer">
+        <div class="registerCard">
             <div class="user_card">
-                <div class="d-flex justify-content-center">
                     <h3 id="form-title">REGISTER ACCOUNT</h3>
-                </div>
                 <div class="d-flex justify-content-center form_container">
 
                     <form method="POST" action="">
                         {% csrf_token %}
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
+                        <div class="input_Container">
+                            
                             {{form.first_name}}
                         </div>
 
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
+                        <div class="input_Container">
+                            
                             {{form.username}}
                         </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
-                            </div>
+                        <div class="input_Container">
+                            
                             {{form.email}}
                         </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
+                        <div class="input_Container">
+                            
                             {{form.password1}}
                         </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
+                        <div class="input_Container">
+                            
                             {{form.password2}}
                         </div>
 
-                        <div class="d-flex justify-content-center mt-3 login_container">
+                        <div class="button_Container">
                             <input class="btn login_btn" type="submit" value="Register Account">
                         </div>
                     </form>
                 </div>
                 {{form.errors}}
                 <div class="mt-4">
-                    <div class="d-flex justify-content-center links">
+                    <div class="loginAccount">
                         Already have an account? <a href="{% url 'login' %}"
                             class="ml-2 btn btn-outline-light">Login</a>
                     </div>

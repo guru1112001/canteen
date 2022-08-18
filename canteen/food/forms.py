@@ -15,7 +15,7 @@ class CreateUserForm(UserCreationForm):# this class create the user so customer 
         model = User
         fields = ["first_name",'username','email','password1','password2'] #fields which we wants in registeration form 
         widgets = { #widgets to edit the fields in a particular way
-            "first_name": forms.TimeInput(attrs={"placeholder": "enter your Name "}),
+            "first_name": forms.TimeInput(attrs={"placeholder": "Enter your Name "}),
             'username': forms.TextInput(attrs={'placeholder': ' Enter UserName'}),
             'email': forms.TextInput(attrs={'placeholder': ' Enter Email'}),
     

@@ -75,7 +75,7 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-success">
       {% if not user.is_staff %}
       <a class="navbar-brand" href="{% url 'menu' %}">
         <img src="{% static 'images/logo.jpg' %}" class="img-responsive"/>Canteen</a>
@@ -121,7 +121,7 @@
           {% endif %}
         </div>
       </div>
-    </nav>
+    </nav> -->
 
     {% if  user.is_staff %}
         {% block d %}
