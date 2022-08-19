@@ -1,3 +1,6 @@
+{% extends 'food/main.html' %}
+{%block login%}
+
 <!DOCTYPE html>
 <html>
 
@@ -11,120 +14,147 @@
 
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600&display=swap');
         body,
         html {
             margin: 0;
             padding: 0;
-            height: 100%;
-            background:#ef9ca6 !important;
-            font-family: raleway;
+            /* height: 100%; */
+            /* background:#ef9ca6 !important; */
+            /* font-family: raleway; */
         }
+
+        /* new styling */
+
+        .loginContainer
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 55px 0px;
+            /* background-color: #5CB3E2; */
+            background-image: url("https://thumbs.dreamstime.com/b/abstract-sky-blue-color-mixture-effects-texture-background-wallpaper-marble-pattern-interiors-wall-design-many-uses-189072790.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .loginCard {
+            background-image: url("https://img.freepik.com/free-vector/man-sitting-desk-unlocking-computer-computer-settings-login-flat-illustration_74855-20645.jpg?w=740&t=st=1660646376~exp=1660646976~hmac=e45cd7656061111998c17f2c4ad337feeefedea40ad54174ba645ef492ff3ab8");
+            height: 600px;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            width: 80%;
+            /* border: 1px solid black; */
+            border-radius: 20px;
+            /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
+            box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+            background-color: white;
+        }
+
 
         .user_card {
-            width: 350px;
-            margin-top: auto;
-            margin-bottom: auto;
-            background:#ea545f;
-            position: relative;
+            width: 500px;
+            /* border: 1px solid black; */
             display: flex;
-            justify-content: center;
             flex-direction: column;
-            padding: 10px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            border-radius: 5px;
+            align-items: center;
+        }
+
+        .user_card h3 {
+            color: #198CA0;
+            font-family: 'Source Sans Pro', sans-serif;
 
         }
 
-        .form_container {
-            margin-top: 20px;
-        }
-
-        #form-title {
-            color: #fff;
+        .input_Container {
+            margin: 15px 0px;
 
         }
 
-        .login_btn {
-            width: 100%;
-            background: #ef9ca6 !important;
-            color: white !important;
+        .input_Container input {
+            width: 450px;
+            background-color: #198CA0;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 18px;
+            border: 0px;
+            color: white;
+            border: none;
+            padding: 5px;
         }
 
-        .login_btn:focus {
-            box-shadow: none !important;
-            outline: 0px !important;
+        ::placeholder {
+            color: white;
         }
 
-        .login_container {
-            padding: 0 2rem;
+        .forget_Container {
+            text-align: center;
+            font-size: 16px;
+            color: #198CA0;
         }
 
-        .input-group-text {
-            background: #ef9ca6 !important;
-            color: white !important;
-            border: 0 !important;
-            border-radius: 0.25rem 0 0 0.25rem !important;
+        .button_Container {
+            text-align: center;
         }
 
-        .input_user,
-        .input_pass:focus {
-            box-shadow: none !important;
-            outline: 0px !important;
+        .button_Container input {
+            width: 250px;
+            padding: 0px;
+            color: white;
+            background-color: #7FB7B0;
+            border-radius: 10px;
         }
 
-        #messages {
-            background-color: black;
-            color: #fff;
-            padding: 10px;
-            margin-top: 10px;
+        .CreateAccount a {
+            color: #198CA0;
+        }
+
+        .loginnavbarContainer
+        {
+            position: absolute;
+            width: 1210px;
         }
     </style>
 
 </head>
 
 <body>
-    <div class="container h-100">
-        <div class="d-flex justify-content-center h-100">
+    <div class="loginContainer">
+        <div class="loginnavbarContainer">
+            {%include "food/navbar.html"%}
+        </div>
+        <div class="loginCard">
             <div class="user_card">
-                <div class="d-flex justify-content-center">
-
-
-                    <h3 id="form-title">LOGIN</h3>
-                </div>
+                <h3 id="form-title">USER LOGIN</h3>
                 <div class="d-flex justify-content-center form_container">
                     <form method="POST" action="">
                         {% csrf_token %}
-                        <div class="input-group mb-3">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
-                            <input type="text" name="username" placeholder="Username..." class="form-control">
+                        <div class="input_Container">
+                            <input type="text" name="username" placeholder="Username">
                         </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input type="password" name="password" placeholder="Password..." class="form-control">
+                        <div class="input_Container">
+                            <input type="password" name="password" placeholder="Password">
                         </div>
-
-                        <div class="d-flex justify-content-center mt-3 login_container">
+                        <div class="forget_Container">
+                            <p>Forget Password</p>
+                        </div>
+                        <div class="button_Container">
                             <input class="btn login_btn" type="submit" value="Login">
                         </div>
                     </form>
-
                 </div>
                 {% for message in messages%}
                 <p>{{message}}</p>
                 {% endfor %}
-                <div class="mt-4">
-                    <div class="d-flex justify-content-center links">
-                        Don't have an account? <a href="{% url 'register' %}" class="ml-2 btn btn-outline-light">Sign Up</a>
-                    </div>
+                <div class="CreateAccount">
+                    <a href="{% url 'register' %}" class="ml-2 btn btn-outline-light">Create Account</a>
                 </div>
             </div>
         </div>
+    </div>
 </body>
-
 </html>
+{% endblock %}
+
