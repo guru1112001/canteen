@@ -1,58 +1,52 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-  <head>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0 maximum-scale=1, minimum-scale=1"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
-    <title>Canteen Management</title>
-    <script>
-      var user = '{{request.user}}'
 
-      function getToken(name) {
-          let cookieValue = null;
-          if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-              const cookie = cookies[i].trim();
-              // Does this cookie string begin with the name we want?
-              if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-              }
-            }
-          }
-          return cookieValue;
-        }
-        const csrftoken = getToken('csrftoken');
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1, minimum-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+  <title>Canteen Management</title>
+  <script>
+    var user = '{{request.user}}'
 
-
-        //Create cart/cookies(Guest user)
-      function getCookie(name) {
-        var cookieArr = document.cookie.split(";")
-
-        for (var i = 0; i < cookieArr.length; i++) {
-          var cookiePair = cookieArr[i].split("=");
-
-          if (name == cookiePair[0].trim()) {
-            //Decode the cookie value
-            return decodeURIComponent(cookiePair[1]);
+    function getToken(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
           }
         }
-        //Return null if not found
-        return null;
       }
+      return cookieValue;
+    }
+    const csrftoken = getToken('csrftoken');
+
+
+    //Create cart/cookies(Guest user)
+    function getCookie(name) {
+      var cookieArr = document.cookie.split(";")
+
+      for (var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+
+        if (name == cookiePair[0].trim()) {
+          //Decode the cookie value
+          return decodeURIComponent(cookiePair[1]);
+        }
+      }
+      //Return null if not found
+      return null;
+    }
 
 
     var cart = JSON.parse(getCookie('cart'))
@@ -63,19 +57,23 @@
     }
 
     console.log('Cart:', cart)
-        
-    </script>
-    <style>
-      .msg {
-        font-size: 18px;
-        color: #fff;
-        margin-right: 20px;
-        font-family: Raleway;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+
+  </script>
+  <style>
+    .msg {
+      font-size: 18px;
+      color: #fff;
+      margin-right: 20px;
+      font-family: Raleway;
+    }
+  </style>
+</head>
+
+<body>
+  {% include 'food/navbar.html' %}
+
+
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-success">
       {% if not user.is_staff %}
       <a class="navbar-brand" href="{% url 'menu' %}">
         <img src="{% static 'images/logo.jpg' %}" class="img-responsive"/>Canteen</a>
@@ -123,76 +121,71 @@
       </div>
     </nav> -->
 
-    {% if  user.is_staff %}
-        {% block d %}
-        {% endblock %}
+  {% if user.is_staff %}
+  {% block d %}
+  {% endblock %}
 
-        {% block customer %}
-        {% endblock %}
+  {% block customer %}
+  {% endblock %}
 
-        {% block update %}
-        {% endblock %}
-        {% block delete %}
-        {% endblock %}
-        {% block customer_update %}
-        {% endblock %}
-        {% block create %}
-        {% endblock %}
-        {% block add_product %}
-        {% endblock %}
-        {% block view_product %}
-        {% endblock %}
-        {% block update_product %}
-        {% endblock %}
-        {% block delete_product %}
-        {% endblock %}
-      {% else %}
-          {% block content %}
-          {% endblock %}
-    {% endif %}
+  {% block update %}
+  {% endblock %}
+  {% block delete %}
+  {% endblock %}
+  {% block customer_update %}
+  {% endblock %}
+  {% block create %}
+  {% endblock %}
+  {% block add_product %}
+  {% endblock %}
+  {% block view_product %}
+  {% endblock %}
+  {% block update_product %}
+  {% endblock %}
+  {% block delete_product %}
+  {% endblock %}
+  {% else %}
+  {% block content %}
+  {% endblock %}
+  {% endif %}
 
-    {%block breakfast%}
-    {% endblock %}
+  {%block breakfast%}
+  {% endblock %}
 
-    {%block lunch%}
-    {% endblock %}
+  {%block lunch%}
+  {% endblock %}
 
-    {%block dinner%}
-    {% endblock %}
-    
-    {%block todayspl%}
-    {% endblock %}
+  {%block dinner%}
+  {% endblock %}
 
-    {%block cart%}
-    {% endblock %}
+  {%block todayspl%}
+  {% endblock %}
 
-    {%block checkout%}
-    {% endblock %}
+  {%block cart%}
+  {% endblock %}
 
-    {%block login%}
-    {% endblock %}
-    <footer class="footer">
-      <p id="foo">&#169; 2022 Canteen Management System.All Rights Reserved</p>
-    </footer>
+  {%block checkout%}
+  {% endblock %}
 
-    <!-- JS, Popper.js, and jQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
+  {%block login%}
+  {% endblock %}
+  <footer class="footer">
+    <p id="foo">&#169; 2022 Canteen Management System.All Rights Reserved</p>
+  </footer>
+
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
 
 
-    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
-  </body>
+  <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+</body>
+
 </html>
